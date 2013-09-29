@@ -35,11 +35,16 @@ public class Things {
 		}
 		String msg = "No such thing: " + name;
 		if (!bag.keySet().isEmpty()) {
+			boolean firstThing = true;
 			String availableThings = "";
 			for (AbstractThing thing : bag.keySet()) {
-				availableThings += thing.name() + ", ";
+				if (!firstThing) {
+					availableThings += ", ";
+				}
+				availableThings += thing.name();
+				firstThing = false;
 			}
-			msg += ", only: " + availableThings;
+			msg += ", only: " + availableThings + ".";
 		}
 		throw new IllegalArgumentException(msg);
 	}

@@ -48,10 +48,11 @@ public class Main {
 		long tour = 0;
 		while (world.isRunning) {
 			for (Player p : world.players) {
-				println("Hello " + p.name + ", your energy bar is " + p.energyBar + ", and you're in " + p.inPlace.name() + " which has:");
+				println("Hello " + p.name + ", your energy bar is " + p.energyBar + ".");
+				print("You're in " + p.inPlace.name() + ", where there are: ");
 				printThings(p.inPlace.things);
 				if (!p.things.bag.isEmpty()) {
-					print("; and you yourself on you have:");
+					print("You have: ");
 					printThings(p.things);
 				}
 				cmd.waitForAndProcessCommand(p, Commands.available);
@@ -67,12 +68,17 @@ public class Main {
 	}
 	
 	void printThings(Things things) {
+		boolean firstThing = true;
 		for (Entry<AbstractThing, Integer> entry : things.bag.entrySet()) {
+			if (!firstThing)
+				print(", ");
 			print(entry.getValue().toString());
 			print("x ");
 			print(entry.getKey().name());
-			print("s ");
+			print("s");
+			firstThing = false;
 		}
+		println(".");
 	}
 
 	void println(String string) {
