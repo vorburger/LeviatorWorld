@@ -19,11 +19,6 @@ public class Commands {
 					return false;
 				}
 			},
-			new Command("admin_quit", "") {
-				@Override void doCommand(CommandContext ctx) {
-					ctx.currentPlayer.world.isRunning = false;
-				}
-			},
 			new Command("go", "<Place>") {
 				@Override void doCommand(CommandContext ctx) {
 					ctx.currentPlayer.go(ctx.getPlace());
@@ -63,6 +58,11 @@ public class Commands {
 				}
 			},
 			
+			new Command("admin_quit", "") {
+				@Override void doCommand(CommandContext ctx) {
+					ctx.currentPlayer.world.isRunning = false;
+				}
+			},
 			new Command("admin_new_user", "<NewPlayer>") {
 				@Override void doCommand(CommandContext ctx) {
 					ctx.currentPlayer.world.players.add(new Player(ctx.getString(), ctx.currentPlayer.world));
@@ -71,6 +71,14 @@ public class Commands {
 			new Command("admin_new_place", "<NewPlace>") {
 				@Override void doCommand(CommandContext ctx) {
 					ctx.currentPlayer.world.places.add(new Place(ctx.getString()));
+				}
+			},
+			new Command("admin_new_thing", "<howMany> <NewThing> <ThingCategory>*") {
+				@Override void doCommand(CommandContext ctx) {
+					int n = ctx.getNumber();
+					Thing newThing = new Thing(ctx.getString());
+					// TODO ThingCategory
+					ctx.currentPlayer.inPlace.things.addThing(newThing, n);
 				}
 			}
 		));
