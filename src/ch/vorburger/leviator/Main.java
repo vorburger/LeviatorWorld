@@ -47,7 +47,9 @@ public class Main {
 
 	void run() {
 		World world = newWorld();
-		println("It's " + world.season);
+		println("LeviatorWorld  Copyright (C) 2013  Michael & Dév Vorburger");
+		println("This program comes with ABSOLUTELY NO WARRANTY.\n");
+		println("Hi! It's " + world.season);
 		long tour = 0;
 		while (world.isRunning) {
 			for (Player p : world.players) {
