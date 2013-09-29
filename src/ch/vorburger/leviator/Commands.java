@@ -45,7 +45,7 @@ public class Commands {
 				@Override void doCommand(CommandContext ctx) {
 					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
 					if (thing instanceof Edible) {
-						ctx.currentPlayer.things.removeThings(thing, 1);
+						ctx.currentPlayer.things.removeThing(thing, 1);
 						ctx.currentPlayer.energyBar += 1;
 					} else {
 						ctx.currentPlayer.info("hey you crazy dude, you cannot eat: " + thing.name());

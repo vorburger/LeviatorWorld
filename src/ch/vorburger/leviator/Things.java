@@ -7,12 +7,12 @@ public class Things {
 
 	Map<AbstractThing, Integer> bag = new HashMap<AbstractThing, Integer>();	
 
-	void addThings(AbstractThing thing, int n) {
+	void addThing(AbstractThing thing, int n) {
 		Integer before = bag.containsKey(thing) ? bag.get(thing) : 0;
 		bag.put(thing, before + n);
 	}
 
-	void removeThings(AbstractThing thing, int n) {
+	void removeThing(AbstractThing thing, int n) {
 		if (!bag.containsKey(thing))
 			throw new IllegalArgumentException("No " + thing.name());
 		Integer newN = bag.get(thing) - n;
@@ -23,8 +23,8 @@ public class Things {
 	}
 	
 	void transferThing(AbstractThing it, int n, Things to) {
-		removeThings(it, n);
-		to.addThings(it, n);
+		removeThing(it, n);
+		to.addThing(it, n);
 	}
 
 	public AbstractThing getThing(String name) throws IllegalArgumentException {

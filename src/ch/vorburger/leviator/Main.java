@@ -11,30 +11,30 @@ public class Main {
 		world.season = Season.Spring;
 
 		Place plain = new Plain();
-		plain.things.addThings(new EdiblePlantableThing("Apple"), 50);
-		plain.things.addThings(new Thing("dirt"),100);
-		plain.things.addThings(new PlantableThing("rose"), 20);
-		plain.things.addThings(new EdiblePlantableThing("medicalHerb"),10 );
-		plain.things.addThings(new Thing("ash"), 10);
+		plain.things.addThing(new EdiblePlantableThing("Apple"), 50);
+		plain.things.addThing(new Thing("dirt"),100);
+		plain.things.addThing(new PlantableThing("rose"), 20);
+		plain.things.addThing(new EdiblePlantableThing("medicalHerb"),10 );
+		plain.things.addThing(new Thing("ash"), 10);
 		world.places.add(plain);
 
 		Forest forest = new Forest();
-		forest.things.addThings(new PlantableThing("birchWood"),20 );
-		forest.things.addThings(new PlantableThing("oakWood"),30 );
-		forest.things.addThings(new EdiblePlantableThing("mango"),50);
-		forest.things.addThings(new Thing("stick"),25 );
+		forest.things.addThing(new PlantableThing("birchWood"),20 );
+		forest.things.addThing(new PlantableThing("oakWood"),30 );
+		forest.things.addThing(new EdiblePlantableThing("mango"),50);
+		forest.things.addThing(new Thing("stick"),25 );
 		world.places.add(forest);
 		
 		Cave cave = new Cave();
-		cave.things.addThings(new Thing("Stone"), 10000);
-		cave.things.addThings(new Thing("coal"), 1000);
-		cave.things.addThings(new Thing("iron"), 150);
-		cave.things.addThings(new Thing("gold"), 50);
-		cave.things.addThings(new Thing("diamond"), 10);
-		cave.things.addThings(new Thing("emerald"), 20);
-		cave.things.addThings(new Thing("saphire"), 20);
-		cave.things.addThings(new Thing("ruby"), 20);
-		cave.things.addThings(new Thing("amethyst"), 15);
+		cave.things.addThing(new Thing("Stone"), 10000);
+		cave.things.addThing(new Thing("coal"), 1000);
+		cave.things.addThing(new Thing("iron"), 150);
+		cave.things.addThing(new Thing("gold"), 50);
+		cave.things.addThing(new Thing("diamond"), 10);
+		cave.things.addThing(new Thing("emerald"), 20);
+		cave.things.addThing(new Thing("saphire"), 20);
+		cave.things.addThing(new Thing("ruby"), 20);
+		cave.things.addThing(new Thing("amethyst"), 15);
 		world.places.add(cave);
 		
 		world.players.add(new Player("Dév", world));
