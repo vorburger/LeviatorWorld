@@ -51,6 +51,16 @@ public class Commands {
 						ctx.currentPlayer.info("hey you crazy dude, you cannot eat: " + thing.name());
 					}
 				}
+			},
+			new Command("plant", "<{Plantable}Thing>") { // [howMany/1]
+				@Override void doCommand(CommandContext ctx) {
+					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
+					if (thing instanceof Plantable) {
+						ctx.currentPlayer.things.transferThing(thing, 1, ctx.currentPlayer.inPlace.things);
+					} else {
+						ctx.currentPlayer.info("you cannot plant: " + thing.name());
+					}
+				}
 			}
 		));
 
