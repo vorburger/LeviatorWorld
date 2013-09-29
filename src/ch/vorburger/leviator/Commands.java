@@ -39,7 +39,7 @@ public class Commands {
 			new Command("eat", "<{Edible}Thing>") { // [howMany/1]
 				@Override boolean isDoneCommand(CommandContext ctx) {
 					Thing thing = ctx.getThing(ctx.currentPlayer.things);
-					if (thing instanceof Edible) {
+					if (thing.isAdaptableTo(Edible.class)) {
 						ctx.currentPlayer.things.removeThing(thing, 1);
 						ctx.currentPlayer.energyBar += 1;
 						return true;
@@ -52,7 +52,7 @@ public class Commands {
 			new Command("plant", "<{Plantable}Thing>") { // [howMany/1]
 				@Override boolean isDoneCommand(CommandContext ctx) {
 					Thing thing = ctx.getThing(ctx.currentPlayer.things);
-					if (thing instanceof Plantable) {
+					if (thing.isAdaptableTo(Plantable.class)) {
 						ctx.currentPlayer.things.transferThing(thing, 1, ctx.currentPlayer.inPlace.things);
 						return true;
 					} else {
@@ -80,11 +80,27 @@ public class Commands {
 			new Command("admin_new_thing", "<howMany> <NewThing> <ThingCategory>*") {
 				@Override void doCommand(CommandContext ctx) {
 					int n = ctx.getNumber();
-					Thing newThing = new Thing(ctx.getString());
-					// TODO ThingCategory
+					String newThingName = ctx.getString();
+					List<String> thingCategoryNames = ctx.getStrings();
+					Class<?> thingCategoryMarkerInterfaces[] = getThingCategoryMarkerInterfacesFromNames(thingCategoryNames);
+					Thing newThing = new Thing(newThingName, thingCategoryMarkerInterfaces);
 					ctx.currentPlayer.inPlace.things.addThing(newThing, n);
 				}
 			}
 		));
 
+	static Class<?>[] getThingCategoryMarkerInterfacesFromNames(List<String> thingCategoryNames) {
+		List<Class<?>> markerInterfaceClassList = new ArrayList<Class<?>>(); 
+		for (String thingCategoryName : thingCategoryNames) {
+			// Could use reflections library to find all relevant marker interfaces dynamically
+			if ("Plantable".equals(thingCategoryName))
+				markerInterfaceClassList.add(Plantable.class);
+			else if ("Edible".equals(thingCategoryName))
+				markerInterfaceClassList.add(Edible.class);
+			else
+				markerInterfaceClassList.add(null);
+		}
+		return markerInterfaceClassList.toArray(new Class<?>[0]);
+	}
+	
 }

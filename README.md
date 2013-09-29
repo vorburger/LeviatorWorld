@@ -1,7 +1,9 @@
 LeviatorWorld
 =============
 
-MMORPG MUD, for learning Java; Text-based, for now:
+MMORPG MUD,
+for learning Java (with easy to understand static class and marker interfaces for OOB features.. yet transparently also fully dynamically extensible at run-time!);
+Text-based, for now:
 
 	It's Spring
 	Hello Dév, your energy bar is 20, and you're in Plain which has:

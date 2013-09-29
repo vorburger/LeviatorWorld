@@ -3,6 +3,7 @@ package ch.vorburger.leviator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -71,7 +72,14 @@ public class CommandPrompt {
 		String getString() {
 			return tokenizer.nextToken();
 		}
-		
+
+		List<String> getStrings() {
+			List<String> strings = new ArrayList<String>(tokenizer.countTokens());
+			while (tokenizer.hasMoreTokens())
+				strings.add(tokenizer.nextToken());
+			return strings;
+		}
+
 		int getNumber() {
 			return Integer.parseInt(getString());
 		}

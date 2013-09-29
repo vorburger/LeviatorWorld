@@ -1,11 +1,13 @@
 package ch.vorburger.leviator;
 
-public class Thing implements Named {
+import ch.vorburger.adaptable.DynamicAdaptable;
+
+public class Thing extends DynamicAdaptable implements Named {
 
 	private final String name;
 
-	public Thing(String name) {
-		super();
+	public Thing(String name, Class<?>... markerInterfaces) {
+		super(markerInterfaces);
 		this.name = name;
 	}
 
