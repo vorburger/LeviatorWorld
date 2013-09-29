@@ -39,6 +39,9 @@ public class Main {
 		
 		world.players.add(new Player("Dév", world));
 		world.players.add(new Player("Michael", world));
+		
+		// world.players = Collections.synchronizedList(world.players);
+		
 		return world;
 	}
 

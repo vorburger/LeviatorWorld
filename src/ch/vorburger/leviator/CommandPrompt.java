@@ -43,6 +43,8 @@ public class CommandPrompt {
 		final String argsHelp;
 		
 		Command(String keyword, String argsHelp) {
+			if (keyword.contains(" "))
+				throw new IllegalArgumentException(keyword);
 			this.keyword = keyword;
 			this.argsHelp = argsHelp;
 		}

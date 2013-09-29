@@ -1,15 +1,17 @@
 package ch.vorburger.leviator;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class World {
 
 	Season season;
 	
-	List<Player> players = new ArrayList<Player>();
+	// CopyOnWriteArrayList used here for in-game modification during main() loop
 	
-	List<Place> places = new ArrayList<Place>();
+	List<Player> players = new CopyOnWriteArrayList<Player>();
+	
+	List<Place> places = new CopyOnWriteArrayList<Place>();
 	
 	boolean isRunning = true;
 

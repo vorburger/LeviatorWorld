@@ -19,7 +19,7 @@ public class Commands {
 					return false;
 				}
 			},
-			new Command("quit", "") {
+			new Command("admin_quit", "") {
 				@Override void doCommand(CommandContext ctx) {
 					ctx.currentPlayer.world.isRunning = false;
 				}
@@ -60,6 +60,11 @@ public class Commands {
 					} else {
 						ctx.currentPlayer.info("you cannot plant: " + thing.name());
 					}
+				}
+			},
+			new Command("admin_new_user", "<NewPlayer>") { // [howMany/1]
+				@Override void doCommand(CommandContext ctx) {
+					ctx.currentPlayer.world.players.add(new Player(ctx.getString(), ctx.currentPlayer.world));
 				}
 			}
 		));
