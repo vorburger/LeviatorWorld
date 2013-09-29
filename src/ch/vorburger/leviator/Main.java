@@ -11,17 +11,17 @@ public class Main {
 		world.season = Season.Spring;
 
 		Place plain = new Plain();
-		plain.things.addThings(new Thing("Apple"), 50);
+		plain.things.addThings(new EdibleThing("Apple"), 50);
 		plain.things.addThings(new Thing("dirt"),100);
 		plain.things.addThings(new Thing("rose"), 20);
-		plain.things.addThings(new Thing("medicalHerb"),10 );
+		plain.things.addThings(new EdibleThing("medicalHerb"),10 );
 		plain.things.addThings(new Thing("ash"), 10);
 		world.places.add(plain);
 
 		Forest forest = new Forest();
 		forest.things.addThings(new Thing("birchWood"),20 );
 		forest.things.addThings(new Thing("oakWood"),30 );
-		forest.things.addThings(new Thing("mango"),50);
+		forest.things.addThings(new EdibleThing("mango"),50);
 		forest.things.addThings(new Thing("stick"),25 );
 		world.places.add(forest);
 		

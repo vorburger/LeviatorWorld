@@ -41,11 +41,15 @@ public class Commands {
 					ctx.currentPlayer.things.transferThing(thing, ctx.getNumber(1), otherPlayerThings);
 				}
 			},
-			new Command("eat", "<Thing>") { // [howMany/1]
+			new Command("eat", "<{Edible}Thing>") { // [howMany/1]
 				@Override void doCommand(CommandContext ctx) {
 					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
-					ctx.currentPlayer.things.removeThings(thing, 1);
-					ctx.currentPlayer.energyBar += 1;
+					if (thing instanceof Edible) {
+						ctx.currentPlayer.things.removeThings(thing, 1);
+						ctx.currentPlayer.energyBar += 1;
+					} else {
+						ctx.currentPlayer.info("hey you crazy dude, you cannot eat: " + thing.name());
+					}
 				}
 			}
 		));
