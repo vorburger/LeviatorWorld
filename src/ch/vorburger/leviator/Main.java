@@ -9,22 +9,34 @@ public class Main {
 	World newWorld() {
 		World world = new World(this);
 		world.season = Season.Spring;
+
 		Place plain = new Plain();
 		plain.things.addThings(new Thing("Apple"), 50);
 		plain.things.addThings(new Thing("dirt"),100);
 		plain.things.addThings(new Thing("rose"), 20);
 		plain.things.addThings(new Thing("medicalHerb"),10 );
 		plain.things.addThings(new Thing("ash"), 10);
-		
 		world.places.add(plain);
-		Forest forest = new Forest();
 
-	
+		Forest forest = new Forest();
 		forest.things.addThings(new Thing("birchWood"),20 );
 		forest.things.addThings(new Thing("oakWood"),30 );
 		forest.things.addThings(new Thing("mango"),50);
 		forest.things.addThings(new Thing("stick"),25 );
 		world.places.add(forest);
+		
+		Cave cave = new Cave();
+		cave.things.addThings(new Thing("Stone"), 10000);
+		cave.things.addThings(new Thing("coal"), 1000);
+		cave.things.addThings(new Thing("iron"), 150);
+		cave.things.addThings(new Thing("gold"), 50);
+		cave.things.addThings(new Thing("diamond"), 10);
+		cave.things.addThings(new Thing("emerald"), 20);
+		cave.things.addThings(new Thing("saphire"), 20);
+		cave.things.addThings(new Thing("ruby"), 20);
+		cave.things.addThings(new Thing("amethyst"), 15);
+		world.places.add(cave);
+		
 		world.players.add(new Player("Dév", world));
 		world.players.add(new Player("Michael", world));
 		return world;

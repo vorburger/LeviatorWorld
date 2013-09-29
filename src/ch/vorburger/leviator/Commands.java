@@ -12,33 +12,40 @@ public class Commands {
 	static List<Command> available = new ArrayList<CommandPrompt.Command>(Arrays.asList(
 			new Command("help", "") {
 				@Override boolean isDoneCommand(CommandContext ctx) {
-					ctx.player.info("Available commands are:");
+					ctx.currentPlayer.info("Available commands are:");
 					for (Command command : available) {
-						ctx.player.info("   " + command.keyword + " " + command.argsHelp);
+						ctx.currentPlayer.info("   " + command.keyword + " " + command.argsHelp);
 					}
 					return false;
 				}
 			},
 			new Command("quit", "") {
 				@Override void doCommand(CommandContext ctx) {
-					ctx.player.world.isRunning = false;
+					ctx.currentPlayer.world.isRunning = false;
 				}
 			},
 			new Command("go", "<Place>") {
 				@Override void doCommand(CommandContext ctx) {
-					ctx.player.go(ctx.getPlace());
+					ctx.currentPlayer.go(ctx.getPlace());
 				}
 			},
 			new Command("take", "<Thing>") { // [howMany/1]
 				@Override void doCommand(CommandContext ctx) {
-					ctx.player.inPlace.things.transferThing(ctx.getThing(ctx.player.inPlace.things), ctx.getNumber(1), ctx.player.things);
+					ctx.currentPlayer.inPlace.things.transferThing(ctx.getThing(ctx.currentPlayer.inPlace.things), ctx.getNumber(1), ctx.currentPlayer.things);
 				}
 			},
 			new Command("give", "<Player> <Thing> [howMany/1]") {
 				@Override void doCommand(CommandContext ctx) {
 					Things otherPlayerThings = ctx.getPlayer().things;
-					AbstractThing thing = ctx.getThing(ctx.player.things);
-					ctx.player.things.transferThing(thing, ctx.getNumber(1), otherPlayerThings);
+					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
+					ctx.currentPlayer.things.transferThing(thing, ctx.getNumber(1), otherPlayerThings);
+				}
+			},
+			new Command("eat", "<Thing>") { // [howMany/1]
+				@Override void doCommand(CommandContext ctx) {
+					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
+					ctx.currentPlayer.things.removeThings(thing, 1);
+					ctx.currentPlayer.energyBar += 1;
 				}
 			}
 		));

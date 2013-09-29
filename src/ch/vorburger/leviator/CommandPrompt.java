@@ -58,10 +58,10 @@ public class CommandPrompt {
 	
 	static class CommandContext {
 		StringTokenizer tokenizer;
-		Player player;
+		Player currentPlayer;
 		
 		CommandContext(Player player, String arguments) {
-			this.player = player;
+			this.currentPlayer = player;
 			tokenizer = new StringTokenizer(arguments);
 			tokenizer.nextToken(); // skip command
 		}
@@ -82,7 +82,7 @@ public class CommandPrompt {
 		}
 
 		Place getPlace() {
-			return player.world.getPlace(getString());
+			return currentPlayer.world.getPlace(getString());
 		}
 
 		public AbstractThing getThing(Things things) {
@@ -90,7 +90,7 @@ public class CommandPrompt {
 		}
 
 		public Player getPlayer() {
-			return player.world.getPlayer(getString());
+			return currentPlayer.world.getPlayer(getString());
 		}
 
 	}
