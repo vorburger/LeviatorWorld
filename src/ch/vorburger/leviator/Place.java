@@ -1,7 +1,7 @@
 package ch.vorburger.leviator;
 
 
-public class Place {
+public class Place implements Named {
 
 	Things things = new Things();
 

@@ -51,7 +51,7 @@ public class Main {
 		long tour = 0;
 		while (world.isRunning) {
 			for (Player p : world.players) {
-				println("Hello " + p.name + ", your energy bar is " + p.energyBar + ".");
+				println("Hello " + p.name() + ", your energy bar is " + p.energyBar + ".");
 				print("You're in " + p.inPlace.name() + ", where there are: ");
 				printThings(p.inPlace.things);
 				if (!p.things.bag.isEmpty()) {

@@ -1,9 +1,9 @@
 package ch.vorburger.leviator;
 
 
-public class Player {
+public class Player implements Named {
 
-	String name;
+	private String name;
 	
 	World world;
 
@@ -30,6 +30,11 @@ public class Player {
 		name = playerName;
 		world = myWorld;
 		inPlace = world.places.get(0);
+	}
+
+	@Override
+	public String name() {
+		return name;
 	}
 	
 }

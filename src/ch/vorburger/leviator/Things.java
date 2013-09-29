@@ -27,26 +27,8 @@ public class Things {
 		to.addThings(it, n);
 	}
 
-	// TODO better share this code with World instead of copy/paste 
 	public AbstractThing getThing(String name) throws IllegalArgumentException {
-		for (AbstractThing thing : bag.keySet()) {
-			if (thing.name().equalsIgnoreCase(name))
-				return thing;
-		}
-		String msg = "No such thing: " + name;
-		if (!bag.keySet().isEmpty()) {
-			boolean firstThing = true;
-			String availableThings = "";
-			for (AbstractThing thing : bag.keySet()) {
-				if (!firstThing) {
-					availableThings += ", ";
-				}
-				availableThings += thing.name();
-				firstThing = false;
-			}
-			msg += ", only: " + availableThings + ".";
-		}
-		throw new IllegalArgumentException(msg);
+		return NamedUtil.get(bag.keySet(), name);
 	}
 
 }
