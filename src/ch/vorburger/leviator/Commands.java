@@ -37,23 +37,27 @@ public class Commands {
 				}
 			},
 			new Command("eat", "<{Edible}Thing>") { // [howMany/1]
-				@Override void doCommand(CommandContext ctx) {
+				@Override boolean isDoneCommand(CommandContext ctx) {
 					Thing thing = ctx.getThing(ctx.currentPlayer.things);
 					if (thing instanceof Edible) {
 						ctx.currentPlayer.things.removeThing(thing, 1);
 						ctx.currentPlayer.energyBar += 1;
+						return true;
 					} else {
 						ctx.currentPlayer.info("hey you crazy dude, you cannot eat: " + thing.name());
+						return false;
 					}
 				}
 			},
 			new Command("plant", "<{Plantable}Thing>") { // [howMany/1]
-				@Override void doCommand(CommandContext ctx) {
+				@Override boolean isDoneCommand(CommandContext ctx) {
 					Thing thing = ctx.getThing(ctx.currentPlayer.things);
 					if (thing instanceof Plantable) {
 						ctx.currentPlayer.things.transferThing(thing, 1, ctx.currentPlayer.inPlace.things);
+						return true;
 					} else {
 						ctx.currentPlayer.info("you cannot plant: " + thing.name());
+						return false;
 					}
 				}
 			},
