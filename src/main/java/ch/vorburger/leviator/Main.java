@@ -1,6 +1,12 @@
 package ch.vorburger.leviator;
 
+import java.lang.reflect.Type;
 import java.util.Map.Entry;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
+import com.google.gson.graph.GraphAdapterBuilder;
 
 public class Main {
 
@@ -47,6 +53,7 @@ public class Main {
 
 	void run() {
 		World world = newWorld();
+//		saveWorld(world);
 		println("LeviatorWorld  Copyright (C) 2013  Michael & Dév Vorburger");
 		println("This program comes with ABSOLUTELY NO WARRANTY.\n");
 		println("Hi! It's " + world.season);
@@ -72,6 +79,22 @@ public class Main {
 		}
 	}
 	
+	private void saveWorld(final World world) {
+		GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
+		GraphAdapterBuilder graphAdapterBuilder = new GraphAdapterBuilder();
+		// TODO: TypeAdapter which writes out all Named with just their name..
+		InstanceCreator<Player> playerInstanceCreator = new InstanceCreator<Player>() {
+			@Override
+			public Player createInstance(Type type) {
+				return new Player("gsonPlayer", world);
+			}
+		};
+		graphAdapterBuilder.addType(Player.class, playerInstanceCreator);
+		graphAdapterBuilder.registerOn(gsonBuilder);
+		Gson gson = gsonBuilder.create();
+		gson.toJsonTree(world);
+	}
+
 	void printThings(Things things) {
 		boolean firstThing = true;
 		for (Entry<Thing, Integer> entry : things.bag.entrySet()) {
