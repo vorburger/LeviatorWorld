@@ -74,7 +74,7 @@ public class Main {
 	
 	void printThings(Things things) {
 		boolean firstThing = true;
-		for (Entry<AbstractThing, Integer> entry : things.bag.entrySet()) {
+		for (Entry<Thing, Integer> entry : things.bag.entrySet()) {
 			if (!firstThing)
 				print(", ");
 			print(entry.getValue().toString());

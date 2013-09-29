@@ -87,7 +87,7 @@ public class CommandPrompt {
 			return currentPlayer.world.getPlace(getString());
 		}
 
-		public AbstractThing getThing(Things things) {
+		public Thing getThing(Things things) {
 			return things.getThing(getString());
 		}
 

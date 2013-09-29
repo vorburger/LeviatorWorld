@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class Things {
 
-	Map<AbstractThing, Integer> bag = new HashMap<AbstractThing, Integer>();	
+	Map<Thing, Integer> bag = new HashMap<Thing, Integer>();	
 
-	void addThing(AbstractThing thing, int n) {
+	void addThing(Thing thing, int n) {
 		Integer before = bag.containsKey(thing) ? bag.get(thing) : 0;
 		bag.put(thing, before + n);
 	}
 
-	void removeThing(AbstractThing thing, int n) {
+	void removeThing(Thing thing, int n) {
 		if (!bag.containsKey(thing))
 			throw new IllegalArgumentException("No " + thing.name());
 		Integer newN = bag.get(thing) - n;
@@ -22,12 +22,12 @@ public class Things {
 			bag.remove(thing);
 	}
 	
-	void transferThing(AbstractThing it, int n, Things to) {
+	void transferThing(Thing it, int n, Things to) {
 		removeThing(it, n);
 		to.addThing(it, n);
 	}
 
-	public AbstractThing getThing(String name) throws IllegalArgumentException {
+	public Thing getThing(String name) throws IllegalArgumentException {
 		return NamedUtil.get(bag.keySet(), name);
 	}
 

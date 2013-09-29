@@ -1,6 +1,6 @@
 package ch.vorburger.leviator;
 
-public class Thing extends AbstractThing {
+public class Thing implements Named {
 
 	private final String name;
 

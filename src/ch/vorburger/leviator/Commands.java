@@ -37,13 +37,13 @@ public class Commands {
 			new Command("give", "<Player> <Thing> [howMany/1]") {
 				@Override void doCommand(CommandContext ctx) {
 					Things otherPlayerThings = ctx.getPlayer().things;
-					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
+					Thing thing = ctx.getThing(ctx.currentPlayer.things);
 					ctx.currentPlayer.things.transferThing(thing, ctx.getNumber(1), otherPlayerThings);
 				}
 			},
 			new Command("eat", "<{Edible}Thing>") { // [howMany/1]
 				@Override void doCommand(CommandContext ctx) {
-					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
+					Thing thing = ctx.getThing(ctx.currentPlayer.things);
 					if (thing instanceof Edible) {
 						ctx.currentPlayer.things.removeThing(thing, 1);
 						ctx.currentPlayer.energyBar += 1;
@@ -54,7 +54,7 @@ public class Commands {
 			},
 			new Command("plant", "<{Plantable}Thing>") { // [howMany/1]
 				@Override void doCommand(CommandContext ctx) {
-					AbstractThing thing = ctx.getThing(ctx.currentPlayer.things);
+					Thing thing = ctx.getThing(ctx.currentPlayer.things);
 					if (thing instanceof Plantable) {
 						ctx.currentPlayer.things.transferThing(thing, 1, ctx.currentPlayer.inPlace.things);
 					} else {
