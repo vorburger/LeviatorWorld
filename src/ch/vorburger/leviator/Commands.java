@@ -62,9 +62,15 @@ public class Commands {
 					}
 				}
 			},
-			new Command("admin_new_user", "<NewPlayer>") { // [howMany/1]
+			
+			new Command("admin_new_user", "<NewPlayer>") {
 				@Override void doCommand(CommandContext ctx) {
 					ctx.currentPlayer.world.players.add(new Player(ctx.getString(), ctx.currentPlayer.world));
+				}
+			},
+			new Command("admin_new_place", "<NewPlace>") {
+				@Override void doCommand(CommandContext ctx) {
+					ctx.currentPlayer.world.places.add(new Place(ctx.getString()));
 				}
 			}
 		));
