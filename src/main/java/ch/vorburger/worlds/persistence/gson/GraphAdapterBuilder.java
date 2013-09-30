@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.google.gson.graph;
+package ch.vorburger.worlds.persistence.gson;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.LinkedList;
@@ -30,6 +31,8 @@ import com.google.gson.InstanceCreator;
 import com.google.gson.JsonElement;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.internal.ConstructorConstructor;
+import com.google.gson.internal.ObjectConstructor;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
@@ -41,10 +44,10 @@ import com.google.gson.stream.JsonWriter;
 // TODO: proper documentation
 @SuppressWarnings("rawtypes")
 public final class GraphAdapterBuilder {
-// private final ConstructorConstructor constructorConstructor = new ConstructorConstructor();
+  private final ConstructorConstructor constructorConstructor = new ConstructorConstructor(Collections.<Type, InstanceCreator<?>>emptyMap());
   private final Map<Type, InstanceCreator<?>> instanceCreators
       = new HashMap<Type, InstanceCreator<?>>();
-/*
+
   public GraphAdapterBuilder addType(Type type) {
     final ObjectConstructor<?> objectConstructor = constructorConstructor.get(TypeToken.get(type));
     InstanceCreator<Object> instanceCreator = new InstanceCreator<Object>() {
@@ -54,7 +57,7 @@ public final class GraphAdapterBuilder {
     };
     return addType(type, instanceCreator);
   }
-*/
+
   public GraphAdapterBuilder addType(Type type, InstanceCreator<?> instanceCreator) {
     if (type == null || instanceCreator == null) {
       throw new NullPointerException();

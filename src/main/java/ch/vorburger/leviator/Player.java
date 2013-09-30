@@ -5,7 +5,7 @@ public class Player implements Named {
 
 	private String name;
 	
-	World world;
+	transient World world;
 
 	Place inPlace;
 	

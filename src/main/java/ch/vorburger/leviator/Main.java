@@ -1,20 +1,14 @@
 package ch.vorburger.leviator;
 
-import java.lang.reflect.Type;
 import java.util.Map.Entry;
 
 import ch.vorburger.worlds.UI;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.InstanceCreator;
-import com.google.gson.graph.GraphAdapterBuilder;
 
 public class Main implements UI {
 
 	CommandPrompt cmd = new CommandPrompt();
 	
-	World newWorld() {
+	public World newWorld() {
 		World world = new World(this);
 		world.season = Season.Spring;
 
@@ -82,27 +76,6 @@ public class Main implements UI {
 		}
 	}
 	
-	private void saveWorld(final World world) {
-		GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
-		GraphAdapterBuilder graphAdapterBuilder = new GraphAdapterBuilder();
-		// TODO: TypeAdapter which writes out all Named with just their name..
-		graphAdapterBuilder.addType(World.class, new InstanceCreator<World>() {
-			@Override
-			public World createInstance(Type type) {
-				return new World(Main.this);
-			}
-		});
-//		graphAdapterBuilder.addType(Player.class, new InstanceCreator<Player>() {
-//			@Override
-//			public Player createInstance(Type type) {
-//				return new Player("gsonPlayer", world);
-//			}
-//		});
-		graphAdapterBuilder.registerOn(gsonBuilder);
-		Gson gson = gsonBuilder.create();
-		gson.toJsonTree(world);
-	}
-
 	void printThings(Things things) {
 		boolean firstThing = true;
 		for (Entry<Thing, Integer> entry : things.bag.entrySet()) {
