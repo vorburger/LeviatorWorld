@@ -21,11 +21,6 @@ public class DynamicMarkerInterfaceAdaptable extends StaticAdaptable {
 		else
 			adaptedableMarkerInterfaces.addAll(Arrays.asList(markerInterfaces));
 	}
-
-	@Override
-	public boolean isAdaptableTo(Class<?> clazz) {
-		return adaptedableMarkerInterfaces.contains(clazz);
-	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
