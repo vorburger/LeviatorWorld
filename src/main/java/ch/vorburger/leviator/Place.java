@@ -1,7 +1,9 @@
 package ch.vorburger.leviator;
 
+import ch.vorburger.adaptable.DynamicAdaptable;
 
-public class Place implements Named {
+
+public class Place extends DynamicAdaptable implements Named {
 
 	Things things = new Things();
 

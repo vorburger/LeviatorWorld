@@ -53,8 +53,13 @@ public class Commands {
 				@Override boolean isDoneCommand(CommandContext ctx) {
 					Thing thing = ctx.getThing(ctx.currentPlayer.things);
 					if (thing.isAdaptableTo(Plantable.class)) {
-						ctx.currentPlayer.things.transferThing(thing, 1, ctx.currentPlayer.inPlace.things);
-						return true;
+						if (ctx.currentPlayer.inPlace.isAdaptableTo(Fertile.class)) {
+							ctx.currentPlayer.things.transferThing(thing, 1, ctx.currentPlayer.inPlace.things);
+							return true;
+						} else {
+							ctx.currentPlayer.info("you cannot plant in place: " + ctx.currentPlayer.inPlace.name());
+							return false;
+						}
 					} else {
 						ctx.currentPlayer.info("you cannot plant: " + thing.name());
 						return false;
