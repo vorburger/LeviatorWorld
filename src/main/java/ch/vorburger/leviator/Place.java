@@ -5,11 +5,11 @@ import ch.vorburger.adaptable.DynamicAdaptable;
 
 public class Place extends DynamicAdaptable implements Named {
 
-	Things things = new Things();
+	public final Things things = new Things();
 
 	private String name;
 
-	Place(String name) {
+	public Place(String name) {
 		super();
 		this.name = name;
 	}

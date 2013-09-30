@@ -26,10 +26,10 @@ public class Player implements Named {
 		world.playerInfo(this, message);
 	}
 
-	Player(String playerName, World myWorld) {
+	public Player(String playerName, Place spawningPlace, World myWorld) {
 		name = playerName;
 		world = myWorld;
-		inPlace = world.places.get(0);
+		inPlace = spawningPlace;
 	}
 
 	@Override

@@ -74,7 +74,7 @@ public class Commands {
 			},
 			new Command("admin_new_user", "<NewPlayer>") {
 				@Override void doCommand(CommandContext ctx) {
-					ctx.currentPlayer.world.players.add(new Player(ctx.getString(), ctx.currentPlayer.world));
+					ctx.currentPlayer.world.players.add(new Player(ctx.getString(), ctx.currentPlayer.inPlace, ctx.currentPlayer.world));
 				}
 			},
 			new Command("admin_new_place", "<NewPlace>") {

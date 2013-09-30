@@ -3,6 +3,8 @@ package ch.vorburger.leviator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import ch.vorburger.worlds.UI;
+
 public class World {
 
 	Season season;
@@ -15,13 +17,13 @@ public class World {
 	
 	boolean isRunning = true;
 
-	Main ui;
+	UI ui;
 
 	void playerInfo(Player player, String message) {
 		ui.println(player.name() + ": " + message);
 	}
 
-	public World(Main main) {
+	public World(UI main) {
 		this.ui = main;
 	}
 
@@ -31,6 +33,14 @@ public class World {
 
 	public Player getPlayer(String name) {
 		return NamedUtil.get(players, name);
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public List<Place> getPlaces() {
+		return places;
 	}
 
 }
