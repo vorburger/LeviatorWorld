@@ -1,4 +1,4 @@
-package ch.vorburger.leviator.bsh;
+package ch.vorburger.worlds.code.bsh;
 
 import bsh.Interpreter;
 
