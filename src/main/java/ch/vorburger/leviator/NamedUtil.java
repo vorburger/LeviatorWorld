@@ -2,6 +2,8 @@ package ch.vorburger.leviator;
 
 import java.util.Collection;
 
+import ch.vorburger.worlds.Named;
+
 public class NamedUtil {
 	private NamedUtil() { }
 

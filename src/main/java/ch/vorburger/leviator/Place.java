@@ -1,6 +1,7 @@
 package ch.vorburger.leviator;
 
 import ch.vorburger.meta.adaptable.DynamicAdaptable;
+import ch.vorburger.worlds.Named;
 
 
 public class Place extends DynamicAdaptable implements Named {

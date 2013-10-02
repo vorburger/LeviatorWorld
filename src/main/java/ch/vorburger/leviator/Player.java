@@ -1,5 +1,7 @@
 package ch.vorburger.leviator;
 
+import ch.vorburger.worlds.Named;
+
 
 public class Player implements Named {
 
