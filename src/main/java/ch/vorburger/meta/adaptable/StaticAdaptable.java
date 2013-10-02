@@ -1,4 +1,4 @@
-package ch.vorburger.adaptable;
+package ch.vorburger.meta.adaptable;
 
 public abstract class StaticAdaptable extends AbstractAdaptable {
 

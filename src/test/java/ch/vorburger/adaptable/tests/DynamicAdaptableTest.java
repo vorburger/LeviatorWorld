@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 import org.junit.Test;
 
-import ch.vorburger.adaptable.Adaptable;
+import ch.vorburger.meta.adaptable.Adaptable;
 
 public class DynamicAdaptableTest {
 

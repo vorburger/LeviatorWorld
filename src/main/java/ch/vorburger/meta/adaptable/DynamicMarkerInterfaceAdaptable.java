@@ -1,4 +1,4 @@
-package ch.vorburger.adaptable;
+package ch.vorburger.meta.adaptable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
