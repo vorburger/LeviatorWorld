@@ -20,4 +20,6 @@ public class WTextFile extends WFile implements Text {
 		throw new IllegalStateException();
 	}
 
+	// BEWARE: There should normally never ever be a need to have a getCharset() or getEncoding() method here.
+
 }

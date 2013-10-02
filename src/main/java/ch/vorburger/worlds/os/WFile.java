@@ -2,10 +2,8 @@ package ch.vorburger.worlds.os;
 
 import com.google.common.net.MediaType;
 
-import ch.vorburger.worlds.Named;
-
 // TODO implement.. idea here is that this is NOT a java.io.File, but an "in-world"
-public class WFile implements Named {
+public class WFile implements WFolderOrFile {
 	// TODO extends WObject which extends DynamicAdaptable?
 
 	protected String name;
