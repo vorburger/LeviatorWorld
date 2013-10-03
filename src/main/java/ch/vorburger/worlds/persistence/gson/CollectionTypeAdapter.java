@@ -14,6 +14,10 @@ import com.google.gson.JsonSerializer;
  * @see http://stackoverflow.com/questions/11942118/how-do-you-get-gson-to-omit-null-or-empty-objects-and-empty-arrays-and-lists
  */
 public class CollectionTypeAdapter implements JsonSerializer<Collection<?>> {
+	
+	// TODO BEWARE this causes somehow issues (caught by WorldRepositoryTest), may be incompat. with GraphAdapterBuilder? Or missing JsonDeserializer?
+	// Doesn't matter, it's a just a stupid little optimization... forget about this.
+	
 	@Override
 	public JsonElement serialize(Collection<?> src, Type typeOfSrc, JsonSerializationContext context) {
 		if (src == null || src.isEmpty()) // exclusion is made here

@@ -5,7 +5,10 @@ import java.util.Map;
 
 public class Things {
 
-	Map<Thing, Integer> bag = new HashMap<Thing, Integer>();	
+	// TODO think again about this.. this actually seems wrong, mixing Types and instances?
+	
+	// TODO http://joschi.github.io/guava-slides/#37
+	public Map<Thing, Integer> bag = new HashMap<Thing, Integer>();	
 
 	public void addThing(Thing thing, int n) {
 		Integer before = bag.containsKey(thing) ? bag.get(thing) : 0;

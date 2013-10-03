@@ -1,15 +1,15 @@
 package ch.vorburger.leviator;
 
-import ch.vorburger.worlds.Named;
+import ch.vorburger.worlds.naming.Named;
 
 
 public class Player implements Named {
 
 	private String name;
 	
-	transient World world;
+	World world;
 
-	Place inPlace;
+	public Place inPlace;
 	
 	Things things = new Things();
 	

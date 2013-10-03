@@ -1,7 +1,7 @@
 package ch.vorburger.leviator;
 
 import ch.vorburger.meta.adaptable.DynamicAdaptable;
-import ch.vorburger.worlds.Named;
+import ch.vorburger.worlds.naming.Named;
 
 public class Thing extends DynamicAdaptable implements Named {
 

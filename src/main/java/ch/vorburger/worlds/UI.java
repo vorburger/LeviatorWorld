@@ -7,4 +7,5 @@ public interface UI {
 
 	void print(String string);
 
+	// TODO we'll have input() related stuff here as well.. instead of System.in in CommandPrompt
 }

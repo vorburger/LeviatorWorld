@@ -2,7 +2,7 @@ package ch.vorburger.leviator;
 
 import java.util.Collection;
 
-import ch.vorburger.worlds.Named;
+import ch.vorburger.worlds.naming.Named;
 
 public class NamedUtil {
 	private NamedUtil() { }
@@ -16,6 +16,7 @@ public class NamedUtil {
 		String msg = "No: " + name;
 		if (!stuff.isEmpty()) {
 			boolean firstThing = true;
+			// TODO use com.google.common.base.Joiner.class
 			String availableStuff = "";
 			for (Named named : stuff) {
 				if (!firstThing) {

@@ -17,7 +17,8 @@ public class LeviatorWorldTest {
 	
 	@Before
 	public void setUp() {
-		world = new World(new NoOpUI());
+		world = new World();
+		world.setUI(new NoOpUI());
 		Place farm = new Place("Farm");
 		farm.addAdapted(Fertile.class);
 		world.getPlaces().add(farm);

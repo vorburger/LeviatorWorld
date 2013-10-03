@@ -1,7 +1,7 @@
 package ch.vorburger.worlds.commands;
 
 import ch.vorburger.worlds.Documented;
-import ch.vorburger.worlds.Named;
+import ch.vorburger.worlds.naming.Named;
 
 public interface WParameter extends Named, Documented {
 

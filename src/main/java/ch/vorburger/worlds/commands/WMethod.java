@@ -3,7 +3,7 @@ package ch.vorburger.worlds.commands;
 import java.util.List;
 
 import ch.vorburger.worlds.Documented;
-import ch.vorburger.worlds.Named;
+import ch.vorburger.worlds.naming.Named;
 
 /**
  * Method, AKA Operation.
@@ -13,7 +13,7 @@ public interface WMethod extends Named, Documented {
 	
 	List<WParameter> getParameters();
 	
-	// TODO should this best be here, or outside in another interface? 
+	// TODO should this best be here, or outside in another interface, @see e.g. WMethodInvoker? 
 	void invoke(Object target, List<Object> parameters);
 	
 	// TODO NOT sure we want/need return type (everything should just be async messages), or declared exceptions?

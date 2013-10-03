@@ -1,0 +1,222 @@
+{
+  "0x1": {
+    "season": "Spring",
+    "players": [
+      "0x2",
+      "0x3"
+    ],
+    "places": [
+      "0x4",
+      "0x5",
+      "0x6"
+    ]
+  },
+  "0x2": {
+    "name": "Dév",
+    "world": "0x1",
+    "inPlace": "0x4",
+    "things": {
+      "bag": [
+        [
+          {
+            "name": "rose",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": [
+              "ch.vorburger.leviator.Plantable"
+            ]
+          },
+          1
+        ]
+      ]
+    },
+    "energyBar": 17
+  },
+  "0x3": {
+    "name": "Michael",
+    "world": "0x1",
+    "inPlace": "0x5",
+    "things": {
+      "bag": {}
+    },
+    "energyBar": 18
+  },
+  "0x4": {
+    "things": {
+      "bag": [
+        [
+          {
+            "name": "medicalHerb",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          10
+        ],
+        [
+          {
+            "name": "rose",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": [
+              "ch.vorburger.leviator.Plantable"
+            ]
+          },
+          19
+        ],
+        [
+          {
+            "name": "ash",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          10
+        ],
+        [
+          {
+            "name": "Apple",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          50
+        ],
+        [
+          {
+            "name": "dirt",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          100
+        ]
+      ]
+    },
+    "name": "Plain",
+    "adapteds": [],
+    "adaptedableMarkerInterfaces": [
+      "ch.vorburger.leviator.Fertile"
+    ]
+  },
+  "0x5": {
+    "things": {
+      "bag": [
+        [
+          {
+            "name": "stick",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          25
+        ],
+        [
+          {
+            "name": "mango",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          50
+        ],
+        [
+          {
+            "name": "birchWood",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": [
+              "ch.vorburger.leviator.Plantable"
+            ]
+          },
+          20
+        ],
+        [
+          {
+            "name": "oakWood",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": [
+              "ch.vorburger.leviator.Plantable"
+            ]
+          },
+          30
+        ]
+      ]
+    },
+    "name": "Forest",
+    "adapteds": [],
+    "adaptedableMarkerInterfaces": []
+  },
+  "0x6": {
+    "things": {
+      "bag": [
+        [
+          {
+            "name": "ruby",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          20
+        ],
+        [
+          {
+            "name": "diamond",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          10
+        ],
+        [
+          {
+            "name": "gold",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          50
+        ],
+        [
+          {
+            "name": "emerald",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          20
+        ],
+        [
+          {
+            "name": "Stone",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          10000
+        ],
+        [
+          {
+            "name": "iron",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          150
+        ],
+        [
+          {
+            "name": "amethyst",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          15
+        ],
+        [
+          {
+            "name": "coal",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          1000
+        ],
+        [
+          {
+            "name": "saphire",
+            "adapteds": [],
+            "adaptedableMarkerInterfaces": []
+          },
+          20
+        ]
+      ]
+    },
+    "name": "cave",
+    "adapteds": [],
+    "adaptedableMarkerInterfaces": []
+  }
+}

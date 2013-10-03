@@ -7,26 +7,28 @@ import ch.vorburger.worlds.UI;
 
 public class World {
 
-	Season season;
+	public Season season;
 	
 	// CopyOnWriteArrayList used here for in-game modification during main() loop
 	
 	List<Player> players = new CopyOnWriteArrayList<Player>();
 	
 	List<Place> places = new CopyOnWriteArrayList<Place>();
-	
-	boolean isRunning = true;
 
-	UI ui;
+	// TODO These two don't really belong here.. factor out elsewhere, later
+	transient boolean isRunning = true;
+	transient UI ui;
 
 	void playerInfo(Player player, String message) {
+		if (ui == null)
+			throw new IllegalStateException("UI not set");
 		ui.println(player.name() + ": " + message);
 	}
 
-	public World(UI main) {
-		this.ui = main;
+	public void setUI(UI ui) {
+		this.ui = ui;
 	}
-
+	
 	public Place getPlace(String name) throws IllegalArgumentException {
 		return NamedUtil.get(places, name);
 	}
