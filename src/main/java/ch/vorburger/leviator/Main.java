@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.util.Map.Entry;
 
 import ch.vorburger.worlds.UI;
-import ch.vorburger.worlds.persistence.gson.WorldRepository;
+import ch.vorburger.worlds.persistence.WorldRepository;
+import ch.vorburger.worlds.persistence.gson.GSONFileWorldRepository;
 
 public class Main implements UI {
 
@@ -15,9 +16,9 @@ public class Main implements UI {
 		WorldRepository repo;
 		File file = new File("./leviator.world.json");
 		if (!file.exists())
-			repo = WorldRepository.newWorldIntoFile(file, new NewWorldFactory().newWorld());
+			repo = GSONFileWorldRepository.newWorldIntoFile(file, new NewWorldFactory().newWorld());
 		else
-			repo = WorldRepository.onExistingFile(file);
+			repo = GSONFileWorldRepository.onExistingFile(file);
 		World world = repo.getWorld();
 		world.setUI(this);
 		

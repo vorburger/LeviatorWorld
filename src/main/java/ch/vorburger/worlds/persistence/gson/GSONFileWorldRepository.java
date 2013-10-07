@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ch.vorburger.leviator.EdiblePlantableThing;
 import ch.vorburger.leviator.Place;
@@ -13,38 +17,37 @@ import ch.vorburger.leviator.PlantableThing;
 import ch.vorburger.leviator.Player;
 import ch.vorburger.leviator.Thing;
 import ch.vorburger.leviator.World;
+import ch.vorburger.worlds.persistence.WorldRepository;
 
+import com.google.common.base.Stopwatch;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class WorldRepository {
+public class GSONFileWorldRepository extends WorldRepository {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GSONFileWorldRepository.class);
+	
 	protected final File file;
-	protected World world;
 	protected Gson gson;
 
-	public static WorldRepository newWorldIntoFile(File file, World initialWorld) throws IOException {
-		WorldRepository repo = new WorldRepository(file);
+	public static GSONFileWorldRepository newWorldIntoFile(File file, World initialWorld) throws IOException {
+		GSONFileWorldRepository repo = new GSONFileWorldRepository(file);
 		repo.world = initialWorld;
 		repo.saveSnapshot();
 		return repo;
 	}
 	
-	public static WorldRepository onExistingFile(File file) throws IOException {
-		WorldRepository repo = new WorldRepository(file);
+	public static GSONFileWorldRepository onExistingFile(File file) throws IOException {
+		GSONFileWorldRepository repo = new GSONFileWorldRepository(file);
 		repo.world = repo.initialLoadFromFile();
 		return repo;
 	}
 
-	protected WorldRepository(File file) {
+	protected GSONFileWorldRepository(File file) {
 		super();
 		this.file = file;
 	}
 	
-	public World getWorld() {
-		return world;
-	}
-
 	protected World initialLoadFromFile() throws IOException {
 		Gson gson = getGSON();
 		Reader fileReader = new FileReader(file);
@@ -57,10 +60,13 @@ public class WorldRepository {
 	 * Caller must ensure that the {@link #getWorld()} is not concurrently modified.
 	 */
 	public void saveSnapshot() throws IOException {
+		Stopwatch stopwatch = Stopwatch.createStarted();
 		Gson gson = getGSON();
 		Writer writer = new FileWriter(file);
 		gson.toJson(world, writer);
 		writer.close();
+		long ms = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+		LOGGER.debug("saveSnapshot() in {}ms", ms);
 	}
 	
 	protected Gson getGSON() {

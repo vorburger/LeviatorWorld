@@ -1,7 +1,6 @@
 package ch.vorburger.leviator.tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -15,13 +14,16 @@ import ch.vorburger.leviator.Player;
 import ch.vorburger.leviator.Season;
 import ch.vorburger.leviator.Thing;
 import ch.vorburger.leviator.World;
-import ch.vorburger.worlds.persistence.gson.WorldRepository;
+import ch.vorburger.worlds.persistence.firebase.FirebaseWorldRepository;
+import ch.vorburger.worlds.persistence.gson.GSONFileWorldRepository;
 
 public class WorldRepositoryTest {
 
 	@Test
 	public void testEmptyWorld() throws Exception {
-		checkWorld(newEmptyWorld());
+		World world = newEmptyWorld();
+		world = checkWorld(world);
+		assertNotNull(world);
 	}
 
 	@Test // TODO Enum in JSON strangely fail - even though GSON should have OOB Enum support.. weird. 
@@ -80,17 +82,30 @@ public class WorldRepositoryTest {
 		return world;
 	}
 	
-	protected World checkWorld(World reReadWorld) throws Exception {
+	protected World checkWorld(World newWorld) throws Exception {
+		// return checkWorldInGSONFile(newWorld);
+		return checkWorldOnFirebase(newWorld);
+	}
+
+	protected World checkWorldOnFirebase(World newWorld) throws Exception {
+		//FirebaseWorldRepository repo = FirebaseWorldRepository.connectWorld("WorldRepositoryTest");
+		//repo.delete();
+		FirebaseWorldRepository repo = FirebaseWorldRepository.newWorld("WorldRepositoryTest", newWorld);
+		repo = FirebaseWorldRepository.connectWorld("WorldRepositoryTest");
+		return repo.getWorld();
+	}
+	
+	protected World checkWorldInGSONFile(World newWorld) throws Exception {
 		File file = new File("target/WorldRepositoryTest.json");
 		file.delete();
 		
-		WorldRepository repo = WorldRepository.newWorldIntoFile(file , reReadWorld);
+		GSONFileWorldRepository repo = GSONFileWorldRepository.newWorldIntoFile(file, newWorld);
 		assertTrue(file.exists());
-		assertEquals(reReadWorld, repo.getWorld());
+		assertEquals(newWorld, repo.getWorld());
 		repo.saveSnapshot();
 		
-		repo = WorldRepository.onExistingFile(file);
-		reReadWorld = repo.getWorld();
+		repo = GSONFileWorldRepository.onExistingFile(file);
+		World reReadWorld = repo.getWorld();
 		return reReadWorld;
 	}
 }
