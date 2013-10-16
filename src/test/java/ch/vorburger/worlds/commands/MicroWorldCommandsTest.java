@@ -1,37 +1,41 @@
 package ch.vorburger.worlds.commands;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
 import org.junit.Test;
 
-import com.google.common.collect.Iterables;
-
 import ch.vorburger.leviator.Place;
 import ch.vorburger.leviator.Player;
 import ch.vorburger.leviator.World;
 import ch.vorburger.leviator.scope.PlayerScopeProvider;
-import ch.vorburger.meta.adaptable.AbstractAdaptable;
+import ch.vorburger.leviator.tests.NoOpUI;
 import ch.vorburger.worlds.core.WClass;
 import ch.vorburger.worlds.core.java.JWClass;
 import ch.vorburger.worlds.naming.QualifiedName;
+
+import com.google.common.collect.Iterables;
 
 public class MicroWorldCommandsTest {
 
 	@Test
 	public void testSomeCommands() {
 		World w = new World();
+		w.setUI(new NoOpUI());
 		Place spawningPlace = new Place("SomePlace");
 		w.getPlaces().add(spawningPlace);
 		w.getPlaces().add(new Place("AnotherPlace"));
 		Player p1 = new Player("Dév", spawningPlace, w);
 		// TODO LATER Player p2 = new Player("Michael", spawningPlace, w);
 		
-		AbstractAdaptable scopePlace = p1.inPlace;
+		// AbstractAdaptable scopePlace = p1.inPlace;
 		// TODO I'm not sure at all yet if this is really smart...
-		ScopeProvider<Player> scopeProvider = new PlayerScopeProvider(); // TODO Guice inject, later? NAH: scopePlace.adaptTo(ScopeProvider.class);
+		// TODO may be instead of this it would be clearer if the World WAS-ADAPTABLE-TO ScopeProvider<Player> ?
+		ScopeProvider<Player> scopeProvider = new PlayerScopeProvider(); // TODO -OR- Guice inject, later? NAH: scopePlace.adaptTo(ScopeProvider.class);
 		// What's the point of this indirection? I could just adaptTo(Scope.class) ?
 		Scope scope = scopeProvider.getScope(p1);
 		
@@ -46,22 +50,24 @@ public class MicroWorldCommandsTest {
 		}
 		assertThat(goCommandQN, not(nullValue()));
 		
-		WCommand aCommand = scope.get(wMethodClass, goCommandQN);
-		List<WCommandArgument> parameters = aCommand.getParameters();
+		WCommand goCommand = scope.get(wMethodClass, goCommandQN);
+		List<WCommandArgument> parameters = goCommand.getParameters();
 		assertThat(parameters.size(), is(1));
 		WCommandArgument placeArgument = parameters.get(0);
 		WClass firstParameterType = placeArgument.getType();
 		assertThat(firstParameterType.name(), is("Place"));
-		Iterable<QualifiedName> availablePlaces = scope.getAllApplicable(placeArgument);
+		//ScopeProvider<WCommandArgument> commandArgScopeProvider = null; // TODO how?
+		//Scope commandArgScope = commandArgScopeProvider.getScope(placeArgument);
+		Scope commandArgScope = placeArgument.getScope();
+		Iterable<QualifiedName> availablePlaces = commandArgScope.getAll(null); // NOT scope.getAll/*Applicable*/(placeArgument);
 		QualifiedName[] availablePlacesArray = Iterables.toArray(availablePlaces, QualifiedName.class);
 		assertThat(availablePlacesArray.length, is(1));
 		
 		Place newPlace = (Place) scope.get(firstParameterType, availablePlacesArray[0]);
 		// LIKE p1.go(newPlace);
-		aCommand.invoke(newPlace);
+		goCommand.invoke(newPlace);
 		
 		assertThat(p1.inPlace, is(newPlace));
-		
 	}
 
 }

@@ -9,6 +9,9 @@ public interface WCommandArgument extends Named, Documented {
 	WClass getType();
 	// NOT Class<?> getType();
 	
+	// TODO may be instead of this it would be clearer if the WCommand WAS-ADAPTABLE-TO ScopeProvider<WCommandArgument> ?
+	Scope getScope();
+	
 	/**
 	 * Static Java method argument would typically have @Nullable.
 	 * (Not only the last parameter may be optional; as with named parameters, skipping is possible.)
