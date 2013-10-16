@@ -1,8 +1,6 @@
 package ch.vorburger.leviator;
 
-import ch.vorburger.worlds.core.WClass;
-import ch.vorburger.worlds.core.WObject;
-import ch.vorburger.worlds.core.java.JWClass;
+import ch.vorburger.worlds.core.java.JWObject;
 import ch.vorburger.worlds.naming.Named;
 import ch.vorburger.worlds.naming.QualifiedName;
 
@@ -11,7 +9,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 
-public class Player implements WObject, Named {
+public class Player extends JWObject implements Named {
 
 	final private String name;
 	
@@ -66,11 +64,6 @@ public class Player implements WObject, Named {
 	@Override
 	public String name() {
 		return name;
-	}
-	
-	@Override
-	public WClass getWClass() {
-		return JWClass.fromJavaClass(getClass());
 	}
 	
 }
