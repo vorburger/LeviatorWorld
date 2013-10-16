@@ -3,6 +3,8 @@ package ch.vorburger.worlds.commands;
 import java.util.List;
 
 public interface StringArgsToParametersConverter {
+	// TODO probably remove this... Scope idea has replaced this? What about getParametersEBNFLine() ? copy it doc somewhere..
+	
 	// TODO this is probably for a given WMethod? Obtained how?
 	
 	// TODO remember the Ctrl-Space requirement...

@@ -12,7 +12,7 @@ public abstract class AbstractAdaptable implements Adaptable {
 		if (adapted.isPresent())
 			return adapted.get();
 		else
-			throw new IllegalArgumentException("cannot adapt to: " + clazz);
+			throw new IllegalArgumentException("cannot adapt " + this.getClass() + " to " + clazz);
 	}
 
 	@Override

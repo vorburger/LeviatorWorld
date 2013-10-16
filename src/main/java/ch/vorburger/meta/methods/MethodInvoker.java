@@ -6,6 +6,7 @@ package ch.vorburger.meta.methods;
  */
 public interface MethodInvoker {
 
+	// TODO rename invokeAsync? return Future<T> ?
 	<T> T invoke(T targetObject); // TODO naming.. *Dispatcher?
 
 	<T> T invokeOnAll(Class<T> targetClass);

@@ -5,17 +5,20 @@ import ch.vorburger.worlds.naming.Named;
 
 public class Player implements Named {
 
-	private String name;
+	final private String name;
 	
-	World world;
+	// TODO use Container/Contained?
+	final public World world;
+
+	// TODO use Container/Contained?
+	final Things things = new Things();
 
 	public Place inPlace;
 	
-	Things things = new Things();
-	
 	int energyBar = 20;
 	
-	void go(Place newPlace) {
+	// TODO some kind of @Command annotation..
+	public void go(Place newPlace) {
 		if (newPlace == inPlace)
 			info("You're already in " + newPlace.name());
 		else {
