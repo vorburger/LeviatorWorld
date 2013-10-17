@@ -1,20 +1,17 @@
 package ch.vorburger.worlds.os;
 
+import ch.vorburger.worlds.naming.QualifiedName;
+
 import com.google.common.net.MediaType;
 
 // TODO implement.. idea here is that this is NOT a java.io.File, but an "in-world"
 public class WFile implements WFolderOrFile {
 	// TODO extends WObject which extends DynamicAdaptable?
 
-	protected String name = "???";
-
-//	public WFile(String name) {
-//		super();
-//		this.name = name;
-//	}
+	protected QualifiedName name = QualifiedName.create("HasNoName");
 
 	@Override
-	public String name() {
+	public QualifiedName name() {
 		return name;
 	}
 

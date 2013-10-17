@@ -57,7 +57,7 @@ public class Main implements UI {
 				print(", ");
 			print(entry.getValue().toString());
 			print("x ");
-			print(entry.getKey().name());
+			print(entry.getKey().name().toString());
 			print("s");
 			firstThing = false;
 		}

@@ -44,8 +44,7 @@ public class Player extends JWObject implements Named {
 		// TODO how to generics? return Names.transform(go_newPlace_scope());
 		Function<? super Place, ? extends QualifiedName> function = new Function<Place, QualifiedName>() {
 			@Override public QualifiedName apply(Place input) {
-				// TODO when Named returns QualifiedName instead String: return input.name();
-				return QualifiedName.create(/* parent?!, */ input.name());
+				return input.name();
 			}
 		};
 		return Iterables.transform(go_newPlace_scope(), function);
@@ -62,8 +61,8 @@ public class Player extends JWObject implements Named {
 	}
 
 	@Override
-	public String name() {
-		return name;
+	public QualifiedName name() {
+		return QualifiedName.create(/* world, */ name);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package ch.vorburger.worlds.core.java;
 
 import ch.vorburger.worlds.core.WClass;
+import ch.vorburger.worlds.naming.QualifiedName;
 
 public class JWClass<T> implements WClass {
 
@@ -8,7 +9,7 @@ public class JWClass<T> implements WClass {
 	private static final WClass theJWClassWClass = new JWClassWClass();
 	
 	public static <T> JWClass<T> fromJavaClass(Class<T> jClass) {
-		// TODO probably use a cache, LATER
+		// TODO probably use a cache, like in PackageQNameCache, LATER
 		return new JWClass<T>(jClass);
 	}
 	
@@ -17,14 +18,23 @@ public class JWClass<T> implements WClass {
 	}
 	
 	@Override
-	public String name() {
-		// TODO adapt later when changing Name.name() to QualifiedName 
-		return jClass.getSimpleName();
+	public QualifiedName name() {
+		return qualifiedNameForClass(jClass);
+	}
+
+	private static QualifiedName qualifiedNameForClass(Class<?> clazz) {
+		QualifiedName jPackageName = PackageQNameCache.INSTANCE.getName(clazz.getPackage());
+		return QualifiedName.create(jPackageName, clazz.getSimpleName());
 	}
 
 	@Override
 	public WClass getWClass() {
 		return theJWClassWClass;
+	}
+
+	@Override
+	public String toString() {
+		return "JWClass [" + jClass + "]";
 	}
 
 	@Override
@@ -62,8 +72,8 @@ public class JWClass<T> implements WClass {
 		}
 
 		@Override
-		public String name() {
-			return this.getClass().getSimpleName();
+		public QualifiedName name() {
+			return qualifiedNameForClass(this.getClass());
 		}
 
 		// no hashCode() & equals() needed here, because there is only ever one instance of this

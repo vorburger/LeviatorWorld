@@ -21,7 +21,7 @@ public class LeviatorWorldTest {
 		farm.addAdapted(Fertile.class);
 		world.getPlaces().add(farm);
 		Place mountain = new Place("Mountain");
-		mountain.things.addThing(new PlantableThing("SomePlantableThing"), 1);
+		mountain.things.addThing(new PlantableThing(mountain, "SomePlantableThing"), 1);
 		world.getPlaces().add(mountain);
 		world.getPlayers().add(new Player("EllieWhoFoundNewHome", mountain, world));
 	}

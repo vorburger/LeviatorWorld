@@ -55,7 +55,7 @@ public class MicroWorldCommandsTest {
 		assertThat(parameters.size(), is(1));
 		WCommandArgument placeArgument = parameters.get(0);
 		WClass firstParameterType = placeArgument.getType();
-		assertThat(firstParameterType.name(), is("Place"));
+		assertThat(firstParameterType.name().getLastSegment(), is("Place"));
 		//ScopeProvider<WCommandArgument> commandArgScopeProvider = null; // TODO how?
 		//Scope commandArgScope = commandArgScopeProvider.getScope(placeArgument);
 		Scope commandArgScope = placeArgument.getScope();

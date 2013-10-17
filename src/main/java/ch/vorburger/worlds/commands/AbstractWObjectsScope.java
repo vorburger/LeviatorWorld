@@ -34,7 +34,9 @@ public abstract class AbstractWObjectsScope extends AbstractDelegatingScope {
 
 	@Override
 	protected Iterable<QualifiedName> getAllFromLocalScope(WClass wClass) {
-		Map<QualifiedName, WObject> innerMap = getMap().get(wClass);
+		Map<WClass, Map<QualifiedName, WObject>> outerMap = getMap();
+		// NOTE: This doesn't deal with subclassing..
+		Map<QualifiedName, WObject> innerMap = outerMap.get(wClass);
 		if (innerMap == null)
 			 return Collections.emptySet();
 		return innerMap.keySet();
@@ -61,8 +63,7 @@ public abstract class AbstractWObjectsScope extends AbstractDelegatingScope {
 			Named named = AdaptableUtil.getAdapter(wObject, Named.class);
 			if (named == null)
 				throw new IllegalArgumentException("WObject could not be adapted to Named: " + wObject);
-			// TODO when Named returns QualifiedName instead String: innerMap.put(named.name(), wObject);
-			innerMap.put(QualifiedName.create(named.name()), wObject);
+			innerMap.put(named.name(), wObject);
 		}
 		return map;
 	}

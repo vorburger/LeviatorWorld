@@ -88,7 +88,7 @@ public class Commands {
 					String newThingName = ctx.getString();
 					List<String> thingCategoryNames = ctx.getStrings();
 					Class<?> thingCategoryMarkerInterfaces[] = getThingCategoryMarkerInterfacesFromNames(thingCategoryNames);
-					Thing newThing = new Thing(newThingName, thingCategoryMarkerInterfaces);
+					Thing newThing = new Thing(ctx.currentPlayer.inPlace, newThingName, thingCategoryMarkerInterfaces);
 					ctx.currentPlayer.inPlace.things.addThing(newThing, n);
 				}
 			}

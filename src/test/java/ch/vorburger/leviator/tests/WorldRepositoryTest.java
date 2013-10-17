@@ -61,7 +61,7 @@ public class WorldRepositoryTest {
 		Place newPlace = new Place("NewPlace");
 		newPlace.addAdapted(Fertile.class);
 		world.getPlaces().add(newPlace);
-		newPlace.things.addThing(new EdiblePlantableThing("SomeThing"), 7);
+		newPlace.things.addThing(new EdiblePlantableThing(newPlace, "SomeThing"), 7);
 		world = checkWorld(world);
 		Thing thing = world.getPlaces().get(0).things.getThing("SomeThing");
 		assertEquals(Integer.valueOf(7), world.getPlaces().get(0).things.bag.get(thing));

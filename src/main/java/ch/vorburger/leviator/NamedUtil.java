@@ -9,7 +9,8 @@ public class NamedUtil {
 
 	static <T extends Named> T get(Collection<T> stuff, String name) {
 		for (T named : stuff) {
-			if (named.name().equalsIgnoreCase(name))
+			// TODO use of QN + getLastSegment() is temp. - this needs to be reviewed, now..
+			if (named.name().getLastSegment().equalsIgnoreCase(name))
 				return named;
 		}
 		
