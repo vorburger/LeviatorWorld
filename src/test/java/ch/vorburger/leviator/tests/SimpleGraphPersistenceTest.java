@@ -3,6 +3,7 @@ package ch.vorburger.leviator.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.junit.Test;
 
 import ch.vorburger.worlds.persistence.gson.GraphAdapterBuilder;
@@ -18,12 +19,12 @@ public class SimpleGraphPersistenceTest {
 	}
 
 	static class Place {
-		String name;
+		@Nullable String name;
 	}
 	
 	static class User {
-		String name;
-		Place inPlace;
+		@Nullable String name;
+		@Nullable Place inPlace;
 	}
 	
 	@Test

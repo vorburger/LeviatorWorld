@@ -10,9 +10,6 @@ public class AdaptableUtil {
 	@SuppressWarnings("unchecked")
 	// package-local - normal clients must use public method below, but StaticAdaptable needs this (and cannot use public, else infi. loop) 
 	static <T> Optional<T> getAdapterIfIsInstance(Object sourceObject, Class<T> adapterType) {
-        if (sourceObject == null) {
-            return null;
-        }
         if (adapterType.isInstance(sourceObject)) {
             return Optional.of((T) sourceObject);
         }

@@ -1,17 +1,21 @@
-package ch.vorburger.worlds.naming;
+package ch.vorburger.worlds.naming.tests;
 
-import org.eclipse.jdt.annotation.NonNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import ch.vorburger.worlds.naming.Path;
+import ch.vorburger.worlds.naming.QualifiedName;
 
 public class PathTest {
 
 	class SomeKindOfStringPath extends Path<String> {
-		public SomeKindOfStringPath(@NonNull String rootSegment) {
+		public SomeKindOfStringPath(String rootSegment) {
 			super(rootSegment);
 		}
-		public SomeKindOfStringPath(Path<String> parent, @NonNull String lastSegment) {
+		public SomeKindOfStringPath(Path<String> parent, String lastSegment) {
 			super(parent, lastSegment);
 		}
 	}

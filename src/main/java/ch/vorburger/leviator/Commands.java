@@ -102,8 +102,8 @@ public class Commands {
 				markerInterfaceClassList.add(Plantable.class);
 			else if ("Edible".equals(thingCategoryName))
 				markerInterfaceClassList.add(Edible.class);
-			else
-				markerInterfaceClassList.add(null);
+//			else
+//				markerInterfaceClassList.add(null);
 		}
 		return markerInterfaceClassList.toArray(new Class<?>[0]);
 	}

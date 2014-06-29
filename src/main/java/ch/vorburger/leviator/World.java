@@ -7,7 +7,7 @@ import ch.vorburger.worlds.UI;
 
 public class World {
 
-	public Season season;
+	public Season season = Season.Spring;
 	
 	// CopyOnWriteArrayList used here for in-game modification during main() loop
 	
@@ -17,11 +17,9 @@ public class World {
 
 	// TODO These two don't really belong here.. factor out elsewhere, later
 	transient boolean isRunning = true;
-	transient UI ui;
+	transient UI ui = new UI.NoUI();
 
 	void playerInfo(Player player, String message) {
-		if (ui == null)
-			throw new IllegalStateException("UI not set");
 		ui.println(player.name() + ": " + message);
 	}
 

@@ -13,11 +13,9 @@ import ch.vorburger.leviator.World;
 
 public class LeviatorWorldTest {
 
-	World world;
-	
 	@Before
 	public void setUp() {
-		world = new World();
+		World world = new World();
 		world.setUI(new NoOpUI());
 		Place farm = new Place("Farm");
 		farm.addAdapted(Fertile.class);

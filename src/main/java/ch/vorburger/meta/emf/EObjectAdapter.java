@@ -5,10 +5,10 @@ import org.eclipse.emf.ecore.EObject;
 public class EObjectAdapter {
 	// TODO do TDD & write unit test/s for however this will end up being used!!
 	
-	protected final EObject eObject;
+	//protected final EObject eObject;
 	
 	public EObjectAdapter(EObject eObject) {
-		this.eObject = eObject;
+		//this.eObject = eObject;
 	}
 
 	public EObjectAdapter() {
@@ -17,7 +17,7 @@ public class EObjectAdapter {
 		// org.eclipse.emf.ecore.impl.FlatEObjectImpl ?
 		// org.eclipse.emf.ecore.impl.EObjectImpl ?
 		// org.eclipse.emf.ecore.impl.BasicEObjectImpl ?
-		this.eObject = null;
+		// this.eObject = null;
 	}
 
 }

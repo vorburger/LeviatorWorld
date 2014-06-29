@@ -6,12 +6,12 @@ public class GitRepo implements ch.vorburger.worlds.os.WRootFolder {
 
 	@Override
 	public String name() {
-		return null;
+		return "TODO";
 	}
 
 	@Override
 	public WFolder getContainer() {
-		return null;
+		throw new UnsupportedOperationException();
 	}
 	
 	// TODO clone()

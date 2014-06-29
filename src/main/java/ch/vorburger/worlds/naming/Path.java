@@ -2,10 +2,9 @@ package ch.vorburger.worlds.naming;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.jdt.annotation.Nullable;
-
-import ch.vorburger.base.Preconditions;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
@@ -23,20 +22,20 @@ public abstract class Path<T> { // TODO implements CharSequence??  Comparable<Qu
 	
 	// TODO it would be nicer if there was a subclasses for PathRoot (without parent), but I'm too dumb to figure out how to combine that with QualifiedName & QualifiedId right now :( 
 	// alternative implementation choice: protected final T[] segments;
-	protected final @Nullable Path<T> parent;
+	protected final Optional<Path<T>> parent;
 	protected final T lastSegment;
 
 	private final int hashCode;
 	
 	protected Path(T rootSegment) {
-		this.parent = null;
-		this.lastSegment = Preconditions.checkNotNull(rootSegment);
+		this.parent = Optional.empty();
+		this.lastSegment = rootSegment;
 		this.hashCode = rootSegment.hashCode();
 	}
 	
 	protected Path(Path<T> parent, T lastSegment) {
-		this.parent = Preconditions.checkNotNull(parent);
-		this.lastSegment = Preconditions.checkNotNull(lastSegment);
+		this.parent = Optional.of(parent);
+		this.lastSegment = lastSegment;
 		// NOT ... Arrays.hashCode(parent.getSegments().toArray());
 		this.hashCode = 31 * parent.hashCode + lastSegment.hashCode();
 	}
@@ -62,7 +61,7 @@ public abstract class Path<T> { // TODO implements CharSequence??  Comparable<Qu
 			if (!getClass().equals(other.getClass()))
 				// @see ch.vorburger.worlds.naming.PathTest.testEqualsBetweenDifferentPathSubclasses()
 				return false;
-			if (parent != null) {
+			if (parent.isPresent()) {
 				return parent.equals(other.parent)
 						&& lastSegment.equals(other.lastSegment);
 			}
@@ -74,15 +73,15 @@ public abstract class Path<T> { // TODO implements CharSequence??  Comparable<Qu
 	}
 
 	@Override public final String toString() {
-		if (parent != null)
-			return joiner.join(joiner.join(parent.getSegments()), getLastSegment());
+		if (parent.isPresent())
+			return joiner.join(joiner.join(parent.get().getSegments()), getLastSegment());
 		else
 			return lastSegment.toString();
 	}
 		
 	public final List<T> getSegments() {
-		if (parent != null) {
-			List<T> parentSegments = parent.getSegments();
+		if (parent.isPresent()) {
+			List<T> parentSegments = parent.get().getSegments();
 			List<T> segments = new ArrayList<T>(parentSegments.size() + 1);
 			segments.addAll(parentSegments);
 			segments.add(lastSegment);

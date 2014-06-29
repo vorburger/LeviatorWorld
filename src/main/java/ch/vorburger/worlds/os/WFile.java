@@ -6,7 +6,12 @@ import com.google.common.net.MediaType;
 public class WFile implements WFolderOrFile {
 	// TODO extends WObject which extends DynamicAdaptable?
 
-	protected String name;
+	protected String name = "???";
+
+//	public WFile(String name) {
+//		super();
+//		this.name = name;
+//	}
 
 	@Override
 	public String name() {

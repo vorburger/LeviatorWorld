@@ -16,18 +16,20 @@
 
 package ch.vorburger.leviator.tests;
 
-import ch.vorburger.worlds.persistence.gson.GraphAdapterBuilder;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import junit.framework.TestCase;
+
+import org.eclipse.jdt.annotation.Nullable;
+
+import ch.vorburger.worlds.persistence.gson.GraphAdapterBuilder;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public final class GraphAdapterBuilderTest extends TestCase {
   public void testSerialization() {
@@ -64,8 +66,10 @@ public final class GraphAdapterBuilderTest extends TestCase {
     Roshambo rock = gson.fromJson(json, Roshambo.class);
     assertEquals("ROCK", rock.name);
     Roshambo scissors = rock.beats;
+    org.junit.Assert.assertNotNull(scissors);
     assertEquals("SCISSORS", scissors.name);
     Roshambo paper = scissors.beats;
+    org.junit.Assert.assertNotNull(paper);
     assertEquals("PAPER", paper.name);
     assertSame(rock, paper.beats);
   }
@@ -175,7 +179,7 @@ public final class GraphAdapterBuilderTest extends TestCase {
 
   static class Roshambo {
     String name;
-    Roshambo beats;
+    @Nullable Roshambo beats;
     Roshambo(String name) {
       this.name = name;
     }

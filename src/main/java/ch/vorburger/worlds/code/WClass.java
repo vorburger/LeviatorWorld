@@ -1,5 +1,7 @@
 package ch.vorburger.worlds.code;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import ch.vorburger.worlds.Validating;
 import ch.vorburger.worlds.os.WTextFile;
 
@@ -12,13 +14,16 @@ import ch.vorburger.worlds.os.WTextFile;
  */
 public class WClass extends WTextFile implements Validating {
 
-	protected Class<?> jClass;
+	protected @Nullable Class<?> jClass;
 
 	// TODO compile, and re-compile if its content changes! how will we have generic change tracking??
 	// TODO verify invariant jClass.getSimpleName() == this.getName() - fileExtension, always; else ch.vorburger.worlds.Validating errors (just like if it doesn't compile)
 	
 	public Class<?> getJClass() {
-		return jClass;
+		if (jClass != null)
+			return jClass;
+		else
+			throw new IllegalStateException();
 	}
 
 	public CodeLang getCodeLang() {
