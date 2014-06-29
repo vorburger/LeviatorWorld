@@ -1,22 +1,24 @@
 package ch.vorburger.meta.adaptable;
 
+import java.util.Optional;
+
 public abstract class AbstractAdaptable implements Adaptable {
 
-	protected abstract <T> T getAdaptedOrNull(Class<T> clazz);
+	protected abstract <T> Optional<T> getAdapted(Class<T> clazz);
 	
 	@Override
 	public final <T> T adaptTo(Class<T> clazz) throws IllegalArgumentException {
-		T adapted = getAdaptedOrNull(clazz);
-		if (adapted != null)
-			return adapted;
+		Optional<T> adapted = getAdapted(clazz);
+		if (adapted.isPresent())
+			return adapted.get();
 		else
 			throw new IllegalArgumentException("cannot adapt to: " + clazz);
 	}
 
 	@Override
 	public final boolean isAdaptableTo(Class<?> clazz) {
-		Object adapted = getAdaptedOrNull(clazz);
-		return adapted != null; 
+		Optional<?> adapted = getAdapted(clazz);
+		return adapted.isPresent(); 
 	}
 
 }

@@ -1,15 +1,17 @@
 package ch.vorburger.worlds.naming;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class PathTest {
 
 	class SomeKindOfStringPath extends Path<String> {
-		public SomeKindOfStringPath(String rootSegment) {
+		public SomeKindOfStringPath(@NonNull String rootSegment) {
 			super(rootSegment);
 		}
-		public SomeKindOfStringPath(Path<String> parent, String lastSegment) {
+		public SomeKindOfStringPath(Path<String> parent, @NonNull String lastSegment) {
 			super(parent, lastSegment);
 		}
 	}

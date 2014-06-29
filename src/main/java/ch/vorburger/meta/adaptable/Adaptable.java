@@ -1,5 +1,6 @@
 package ch.vorburger.meta.adaptable;
 
+
 public interface Adaptable {
 
 	boolean isAdaptableTo(Class<?> clazz);

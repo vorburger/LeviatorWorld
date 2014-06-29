@@ -3,7 +3,6 @@ package ch.vorburger.worlds.naming;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import ch.vorburger.base.Preconditions;
@@ -25,7 +24,7 @@ public abstract class Path<T> { // TODO implements CharSequence??  Comparable<Qu
 	// TODO it would be nicer if there was a subclasses for PathRoot (without parent), but I'm too dumb to figure out how to combine that with QualifiedName & QualifiedId right now :( 
 	// alternative implementation choice: protected final T[] segments;
 	protected final @Nullable Path<T> parent;
-	protected final @NonNull T lastSegment;
+	protected final T lastSegment;
 
 	private final int hashCode;
 	
@@ -52,7 +51,7 @@ public abstract class Path<T> { // TODO implements CharSequence??  Comparable<Qu
 		return hashCode;
 	}
 
-	@Override public final boolean equals(Object obj) {
+	@Override public final boolean equals(@Nullable Object obj) {
 		if (obj==this)
 			return true;
 		if (obj instanceof Path) {

@@ -3,6 +3,7 @@ package ch.vorburger.meta.adaptable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class DynamicAdaptable extends DynamicMarkerInterfaceAdaptable {
 
@@ -24,15 +25,15 @@ public class DynamicAdaptable extends DynamicMarkerInterfaceAdaptable {
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	protected <T> T getAdaptedOrNull(Class<T> clazz) {
-		T parent = super.getAdaptedOrNull(clazz);
-		if (parent != null)
+	protected <T> Optional<T> getAdapted(Class<T> clazz) {
+		Optional<T> parent = super.getAdapted(clazz);
+		if (parent.isPresent())
 			return parent;
 		for (Object adapted : adapteds) {
 			if (clazz.isInstance(adapted))
-				return (T) adapted;
+				return Optional.of((T) adapted);
 		}
-		return null;
+		return Optional.empty();
 	}
 
 }

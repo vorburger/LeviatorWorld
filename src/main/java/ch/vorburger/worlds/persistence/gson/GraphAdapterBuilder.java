@@ -25,6 +25,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.InstanceCreator;
@@ -35,7 +37,6 @@ import com.google.gson.internal.ConstructorConstructor;
 import com.google.gson.internal.ObjectConstructor;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 /**
@@ -91,11 +92,6 @@ public final class GraphAdapterBuilder {
       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
       return new TypeAdapter<T>() {
         @Override public void write(JsonWriter out, T value) throws IOException {
-          if (value == null) {
-            out.nullValue();
-            return;
-          }
-
           Graph graph = graphThreadLocal.get();
           boolean writeEntireGraph = false;
 
@@ -139,12 +135,8 @@ public final class GraphAdapterBuilder {
           }
         }
 
-        @Override public T read(JsonReader in) throws IOException {
-          if (in.peek() == JsonToken.NULL) {
-            in.nextNull();
-            return null;
-          }
-
+        @SuppressWarnings("null")
+		@Override public T read(JsonReader in) throws IOException {
           /*
            * Again we have one of two cases:
            *  1. We've encountered the first known object in this graph. Read
@@ -173,7 +165,7 @@ public final class GraphAdapterBuilder {
                 currentName = name;
               }
               JsonElement element = elementAdapter.read(in);
-              graph.map.put(name, new Element<T>(null, name, typeAdapter, element));
+              graph.map.put(name, new Element<@Nullable T>(null, name, typeAdapter, element));
             }
             in.endObject();
           } else {
@@ -198,7 +190,7 @@ public final class GraphAdapterBuilder {
             }
           }
         }
-      };
+      }.nullSafe();
     }
 
     /**
