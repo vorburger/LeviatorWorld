@@ -3,6 +3,7 @@ package ch.vorburger.worlds.commands;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import ch.vorburger.meta.adaptable.AdaptableUtil;
 import ch.vorburger.worlds.core.WClass;
@@ -20,16 +21,14 @@ import ch.vorburger.worlds.naming.QualifiedName;
  */
 public abstract class AbstractWObjectsScope extends AbstractDelegatingScope {
 
-	private Map<WClass, Map<QualifiedName, WObject>> map;
+	// private Map<WClass, Map<QualifiedName, WObject>> cachedMap;
 	
 	protected AbstractWObjectsScope(Scope parentScope) {
 		super(parentScope);
 	}
 
 	protected Map<WClass, Map<QualifiedName, WObject>> getMap() {
-		if (map == null)
-			map = getClassNameObjectMap();
-		return map;
+		return getClassNameObjectMap();
 	}
 
 	@Override
@@ -60,10 +59,10 @@ public abstract class AbstractWObjectsScope extends AbstractDelegatingScope {
 				innerMap = new HashMap<>();
 				map.put(wClass, innerMap);
 			}
-			Named named = AdaptableUtil.getAdapter(wObject, Named.class);
-			if (named == null)
+			Optional<Named> optionalNamed = AdaptableUtil.getAdapter(wObject, Named.class);
+			if (!optionalNamed.isPresent())
 				throw new IllegalArgumentException("WObject could not be adapted to Named: " + wObject);
-			innerMap.put(named.name(), wObject);
+			innerMap.put(optionalNamed.get().name(), wObject);
 		}
 		return map;
 	}
